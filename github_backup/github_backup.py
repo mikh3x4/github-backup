@@ -328,6 +328,10 @@ def parse_args(args=None):
                         dest='exclude',
                         help='names of repositories to exclude',
                         nargs="*")
+    parser.add_argument('--collaborator',
+                        dest='collaborator',
+                        action='store_true',
+                        help='Include repositories where user is a collaborator')
     return parser.parse_args(args)
 
 
@@ -697,7 +701,12 @@ def retrieve_repositories(args, authenticated_user):
             args.user,
             args.repository)
 
-    repos = retrieve_data(args, template, single_request=single_request)
+    if args.collaborator:
+        query_args={'affiliation' : 'owner,collaborator'}
+    else:
+        query_args = None
+
+    repos = retrieve_data(args, template, single_request=single_request, query_args = query_args)
 
     if args.all_starred:
         starred_template = 'https://{0}/users/{1}/starred'.format(get_github_api_host(args), args.user)
@@ -733,7 +742,7 @@ def filter_repositories(args, unfiltered_repositories):
     repositories = []
     for r in unfiltered_repositories:
         # gists can be anonymous, so need to safely check owner
-        if r.get('owner', {}).get('login') == args.user or r.get('is_starred'):
+        if r.get('owner', {}).get('login') == args.user or r.get('is_starred') or (args.collaborator and not r.get("is_gist", False)):
             repositories.append(r)
 
     name_regex = None
