@@ -10,7 +10,7 @@ backup a github user or organization
 
 Fork
 ============
-This fork adds support for the exclude flag (`Assimila's fork <https://github.com/Assimila/python-github-backup/tree/exclude_repositories>`) and for the collaborator option
+This fork adds support for the exclude flag (`Assimila's fork <https://github.com/Assimila/python-github-backup/tree/exclude_repositories>`_) and for the collaborator option
 
 _
 
