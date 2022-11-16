@@ -8,6 +8,10 @@ github-backup
 
 backup a github user or organization
 
+Fork
+============
+This fork adds support for the exclude flag (from [Assimila's fork](https://github.com/Assimila/python-github-backup/tree/exclude_repositories) and for the collaborator option
+
 Requirements
 ============
 
@@ -16,13 +20,10 @@ Requirements
 Installation
 ============
 
-Using PIP via PyPI::
-
-    pip install github-backup
 
 Using PIP via Github::
 
-    pip install git+https://github.com/josegonzalez/python-github-backup.git#egg=github-backup
+    pip install git+https://github.com/mikh3x4/github-backup.git
 
 Usage
 =====
